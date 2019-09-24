@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "trie.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "orihime.labels" . | indent 4 }}
     orihime/component: goo-trie
@@ -56,6 +57,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "dict.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "orihime.labels" . | indent 4 }}
     orihime/component: goo-dict
@@ -117,6 +119,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "mod.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "orihime.labels" . | indent 4 }}
     orihime/component: mod-goo
@@ -180,6 +183,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "django.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "orihime.labels" . | indent 4 }}
     orihime/component: orihime-django
@@ -212,7 +216,7 @@ spec:
           name: orihime-django-srv
         env:
         - name: ORIHIME_DJANGO_ENVIRONMENT
-          value: kubernetes
+          value: {{ .Values.djangoEnvironment }}
         - name: ORIHIME_RELEASE
           value: {{ .Release.Name }}
         - name: ORIHIME_NAMESPACE
@@ -220,7 +224,7 @@ spec:
         - name: SECRET_KEY
           valueFrom:
             secretKeyRef:
-              name: orihime-django
+              name: {{ include "django.fullname" . }}
               key: SECRET_KEY
         ports:
         - containerPort: 80

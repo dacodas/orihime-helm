@@ -1,6 +1,6 @@
 replicaCount: 1
 
-djangoEnvironment: kubernetes
+djangoEnvironment: kubernetes_production
 
 imagePullSecrets:
   - name: container-registry-dacodastrack-com-secret
