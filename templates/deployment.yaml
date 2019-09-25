@@ -24,7 +24,7 @@ spec:
     {{- end }}
       containers:
       - name: goo-trie
-        image: container-registry.dacodastrack.com/goo-trie:latest
+        image: container-registry.dacodastrack.com/goo-trie:{{ include "orihime.imageTag" . }}
         imagePullPolicy: Always
         ports:
         - containerPort: 7081
@@ -79,7 +79,7 @@ spec:
     {{- end }}
       containers:
       - name: goo-dict
-        image: container-registry.dacodastrack.com/goo-dict:latest
+        image: container-registry.dacodastrack.com/goo-dict:{{ include "orihime.imageTag" . }}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -141,7 +141,7 @@ spec:
     {{- end }}
       containers:
       - name: apache
-        image: container-registry.dacodastrack.com/mod-goo:latest
+        image: container-registry.dacodastrack.com/mod-goo:{{ include "orihime.imageTag" . }}
         imagePullPolicy: Always
         env:
         - name: GOO_TRIE_HOST
@@ -205,7 +205,7 @@ spec:
     {{- end }}
       containers:
       - name: orihime-django
-        image: container-registry.dacodastrack.com/orihime-django:latest
+        image: container-registry.dacodastrack.com/orihime-django:{{ include "orihime.imageTag" . }}
         imagePullPolicy: Always
         volumeMounts:
         - mountPath: /var/lib/orihime-django
